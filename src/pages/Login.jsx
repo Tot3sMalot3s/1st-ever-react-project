@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 
 const Container = styled.div`
-    width: 100vw;
+    width: auto;
     height: 100vh;
     background: linear-gradient(
       rgba(255, 255, 255, 0.4),
@@ -56,7 +58,8 @@ const Button = styled.button`
     }
 `
 
-const Link = styled.a`
+const Transfer = styled(Link)`
+    color: black;
     margin: 10px 0px;
     font-size: 12px;
     text-decoration: underline;
@@ -86,8 +89,13 @@ const Login = () => {
         </Form>
         <BottomWrapper>
                 <Button>LOG IN</Button>
-                <Link>FORGOT PASSWORD?</Link>
-                <Link>CREATE NEW ACCOUNT</Link>
+
+                <Transfer to="/recover-password">
+                    FORGOT PASSWORD?
+                </Transfer>
+                <Transfer to="/register">
+                    CREATE NEW ACCOUNT
+                </Transfer>
         </BottomWrapper>
     </Wrapper>
 </Container>

@@ -2,6 +2,9 @@ import Badge from '@mui/material/Badge';
 import { Search, ShoppingCartOutlined, AccountCircleOutlined, FavoriteBorderOutlined, ChatOutlined, AddCircleOutlineOutlined, FormatListBulleted} from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from "react-redux"
+import { Routes, Route, Link } from "react-router-dom";
+
 
 
 
@@ -44,11 +47,13 @@ const Center = styled.div`
   flex: 1;
   align-items: center;
 `
-const Logo = styled.h1`
+const Logo = styled(Link)`
   font-weight: bold;
   color: black;
   cursor: pointer;
   padding-left: 30px;
+  font-size: 32px;
+  text-decoration: none;
 `
 const Right = styled.div`
   flex: 1;
@@ -72,12 +77,23 @@ const SearchButton = styled.button`
   cursor: pointer;
   align-items: center;
 `
+
+const ButtonTransferer = styled(Link)`
+  color: black;
+  &:hover{
+    color: gray;
+  }
+`
 function Navbar() {
+
+  const logged = useSelector((state)=>state.logged);
+
+
   return (
     <Container>
       <Wrapper>
         <Left>
-        <Logo>ADDA</Logo>
+        <Logo to="/">ADDA</Logo>
         </Left>
         <Center>
         <SearchContainer>
@@ -89,21 +105,31 @@ function Navbar() {
         </Center>
         <Right>
         <MenuItem>
-          <FormatListBulleted/>
+            <ButtonTransferer to="*">
+              <FormatListBulleted/>
+            </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <AddCircleOutlineOutlined/>
+          <ButtonTransferer to="*">
+            <AddCircleOutlineOutlined/>
+          </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <Badge badgeContent={0} color="primary">
-            <ChatOutlined/>
-          </Badge>
+          <ButtonTransferer to="*">
+            <Badge badgeContent={0} color="primary">
+              <ChatOutlined/>
+            </Badge>
+          </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <FavoriteBorderOutlined/>
+          <ButtonTransferer to="*">
+            <FavoriteBorderOutlined/>
+          </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <AccountCircleOutlined/>
+          <ButtonTransferer to={logged ? "/profile" : "/register"}>
+            <AccountCircleOutlined/>
+          </ButtonTransferer>
         </MenuItem>
         </Right>
       </Wrapper> 

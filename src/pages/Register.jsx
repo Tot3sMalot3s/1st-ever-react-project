@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
-    width: 100vw;
+    width: auto;
     height: 100vh;
     background: linear-gradient(
       rgba(255, 255, 255, 0.4),
@@ -72,7 +72,8 @@ const MenuItem = styled.button`
   cursor: pointer;
   margin-left: 15px;
 `
-const Link = styled.a`
+const Transfer = styled(Link)`
+    color: black;
     margin: 10px 0px;
     font-size: 12px;
     text-decoration: underline;
@@ -99,7 +100,9 @@ const Register = () => {
                     data in accordance with the <b>PRIVACY POLICY</b>
                 </Agreement>
                 <Button>CREATE</Button>
-                <Link>I ALREADY HAVE AN ACCOUNT</Link>
+                <Transfer to="/login">
+                    I ALREADY HAVE AN ACCOUNT
+                </Transfer>
             </Form>
         </Wrapper>
     </Container>

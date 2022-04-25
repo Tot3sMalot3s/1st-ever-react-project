@@ -118,7 +118,6 @@ const SellerContact = styled.div`
 const Product = () => {
   return (
     <Container>
-        <Navbar/>
         <Announcement/>
             <Wrapper>
                 <ImgContainer>

@@ -1,8 +1,12 @@
-import { createStore } from "redux";
+import {createStore} from 'redux';
 
-const reducerFn = (state = { loginState: 0}, action) => {
+
+const reducerFn = (state = {logged: 0}, action) => {
     return state;
+
 }
+
+
 
 const store = createStore(reducerFn);
 export default store;

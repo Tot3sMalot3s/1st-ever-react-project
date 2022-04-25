@@ -14,16 +14,12 @@ import Footer from '../components/Footer'
 function Home() {
   return (
     <div>
-        <Navbar/>
-        <Announcement/>
         <Slider/>
         <BrowseCategories/>
         <Categories/>
         <Categories1/>
         <BrowseDeals/>
         <Products/>
-        <Newsletter/>
-        <Footer/>
     </div>
   )
 }
