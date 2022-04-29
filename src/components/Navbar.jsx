@@ -6,8 +6,6 @@ import { useSelector } from "react-redux"
 import { Routes, Route, Link } from "react-router-dom";
 
 
-
-
 const Container = styled.div`
   height: 60px;
   position: sticky;
@@ -105,24 +103,24 @@ function Navbar() {
         </Center>
         <Right>
         <MenuItem>
-            <ButtonTransferer to="*">
+            <ButtonTransferer to={logged ? "/*" : "/register"}>
               <FormatListBulleted/>
             </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <ButtonTransferer to="*">
+          <ButtonTransferer to={logged ? "/*" : "/register"}>
             <AddCircleOutlineOutlined/>
           </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <ButtonTransferer to="*">
+          <ButtonTransferer to={logged ? "/*" : "/register"}>
             <Badge badgeContent={0} color="primary">
               <ChatOutlined/>
             </Badge>
           </ButtonTransferer>
         </MenuItem>
         <MenuItem>
-          <ButtonTransferer to="*">
+          <ButtonTransferer to={logged ? "/*" : "/register"}>
             <FavoriteBorderOutlined/>
           </ButtonTransferer>
         </MenuItem>
