@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
 
 const Container = styled.div`
@@ -92,14 +92,17 @@ const SuccessLogTxt = styled.p`
 `;
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const userRef = useRef();
   const errRef = useRef();
 
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -114,7 +117,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://3436-92-118-76-204.ngrok.io/api/login/",
+        "http://1e80-92-118-76-204.ngrok.io/api/login/",
         JSON.stringify({ username: user, password: pwd }),
         {
           headers: { "Content-Type": "application/json" },
@@ -127,7 +130,7 @@ const Login = () => {
       setAuth({ user, pwd, accessToken });
       setUser("");
       setPwd("");
-      setSuccess(true);
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -142,46 +145,35 @@ const Login = () => {
   };
 
   return (
-    <>
-      {success ? (
-        <Container>
-          <Wrapper>
-            <Title>You are logged in!</Title>
-            <SuccessLogTxt>For now, you can start using ADDA</SuccessLogTxt>
-          </Wrapper>
-        </Container>
-      ) : (
-        <Container>
-          <Wrapper>
-            {errMsg && <WarnMsg ref={errRef}>{errMsg}</WarnMsg>}
-            <Title>SIGN IN</Title>
-            <Form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="username"
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                required
-              />
-              <Input
-                type="password"
-                placeholder="password"
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                required
-              />
-              <Button>LOG IN</Button>
-            </Form>
-            <BottomWrapper>
-              <Transfer to="*">FORGOT PASSWORD?</Transfer>
-              <Transfer to="/register">CREATE NEW ACCOUNT</Transfer>
-            </BottomWrapper>
-          </Wrapper>
-        </Container>
-      )}
-    </>
+    <Container>
+      <Wrapper>
+        {errMsg && <WarnMsg ref={errRef}>{errMsg}</WarnMsg>}
+        <Title>SIGN IN</Title>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            placeholder="username"
+            ref={userRef}
+            autoComplete="off"
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
+            required
+          />
+          <Button>LOG IN</Button>
+        </Form>
+        <BottomWrapper>
+          <Transfer to="*">FORGOT PASSWORD?</Transfer>
+          <Transfer to="/register">CREATE NEW ACCOUNT</Transfer>
+        </BottomWrapper>
+      </Wrapper>
+    </Container>
   );
 };
 

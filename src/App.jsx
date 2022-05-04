@@ -13,26 +13,33 @@ import Profile from "./pages/Profile";
 import Favs from "./pages/Favs";
 import Inbox from "./pages/Inbox";
 import CategoriesList from "./pages/CategoriesList";
+import Layout from "./pages/Layout";
+import CreateAd from "./pages/CreateAd";
+import RequireAuth from "./components/requireAuth";
+import ProfileHeader from "./components/ProfileHeader";
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Announcement />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-        {/* protected */}
-        <Route path="/profile" elemtn={<Profile />} />
-        <Route path="/favs" element={<Favs />} />
-        <Route path="/inbox" element={<Inbox />} />
-        <Route path="/categories-list" element={<CategoriesList />} />
+          {/* protected */}
+          <Route element={<RequireAuth />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/favs" element={<Favs />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/create-ad" element={<CreateAd />} />
+            <Route path="/categories-list" element={<CategoriesList />} />
+          </Route>
+
+          {/* Missing */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
-      <Newsletter />
-      <Footer />
     </>
   );
 };

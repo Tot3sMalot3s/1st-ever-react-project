@@ -161,7 +161,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "/register",
+        "http://1e80-92-118-76-204.ngrok.io/api/register/",
         JSON.stringify({
           username: user,
           password1: pwd,
