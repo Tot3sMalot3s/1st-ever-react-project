@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import axios from "../api/axios";
+import axios from "axios";
 
 const Container = styled.div`
   width: auto;
@@ -161,7 +161,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://1e80-92-118-76-204.ngrok.io/api/register/",
+        "https://sheltered-lake-08061.herokuapp.com/api/register/",
         JSON.stringify({
           username: user,
           password1: pwd,

@@ -17,6 +17,12 @@ import Layout from "./pages/Layout";
 import CreateAd from "./pages/CreateAd";
 import RequireAuth from "./components/requireAuth";
 import ProfileHeader from "./components/ProfileHeader";
+import Housing from "./pages/Housing";
+import BeautyProducts from "./pages/BeautyProducts";
+import Electronics from "./pages/Electronics";
+import RealEstate from "./pages/RealEstate";
+import Services from "./pages/Services";
+import Auto from "./pages/Auto";
 
 const App = () => {
   return (
@@ -26,6 +32,13 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+
+          <Route path="/housing" element={<Housing />} />
+          <Route path="/beauty-products" element={<BeautyProducts />} />
+          <Route path="/electronics" element={<Electronics />} />
+          <Route path="/real-estate" element={<RealEstate />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/auto" element={<Auto />} />
 
           {/* protected */}
           <Route element={<RequireAuth />}>

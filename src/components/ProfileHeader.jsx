@@ -3,8 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../context/AuthProvider";
 import { PersonSharp, WorkspacePremiumOutlined } from "@mui/icons-material";
+import AuthContext from "../context/AuthContext";
 
 const Container = styled.div`
   display: flex;
@@ -78,13 +78,7 @@ const Settings = styled.button`
 `;
 
 const ProfileHeader = () => {
-  const { setAuth } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const logout = (async) => {
-    setAuth({});
-    navigate("/");
-  };
+  let { user, logoutUser } = useContext(AuthContext);
 
   return (
     <Container>
@@ -93,7 +87,9 @@ const ProfileHeader = () => {
           <Avatar sx={{ bgcolor: deepPurple[500], width: 128, height: 128 }}>
             <PersonSharp sx={{ fontSize: 72 }} />
           </Avatar>
-          <WelcomeText>Welcome, %Fist_name Last_name%</WelcomeText>
+          <WelcomeText>
+            Welcome, {user.first_name} {user.last_name}
+          </WelcomeText>
         </LeftPart>
         <RightPart>
           <BuyPremium>
@@ -101,7 +97,7 @@ const ProfileHeader = () => {
             BUY PREMIUM <WorkspacePremiumOutlined />
           </BuyPremium>
           <Settings>Settings</Settings>
-          <Logout onClick={logout}>LOG OUT</Logout>
+          <Logout onClick={logoutUser}>LOG OUT</Logout>
         </RightPart>
       </Wrapper>
     </Container>

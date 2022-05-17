@@ -112,13 +112,6 @@ function Navbar() {
             </ButtonTransferer>
           </MenuItem>
           <MenuItem>
-            <ButtonTransferer to="/inbox">
-              <Badge badgeContent={0} color="primary">
-                <ChatOutlined />
-              </Badge>
-            </ButtonTransferer>
-          </MenuItem>
-          <MenuItem>
             <ButtonTransferer to="/favs">
               <FavoriteBorderOutlined />
             </ButtonTransferer>

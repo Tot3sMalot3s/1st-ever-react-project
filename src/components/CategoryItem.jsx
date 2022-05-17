@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { Router, Link } from "react-router-dom";
 
 const Container = styled.div`
   flex: 1;
-  margin: 20px;
+  margin: 5px;
   height: 70vh;
   position: relative;
   cursor: pointer;
@@ -37,9 +38,11 @@ const CategoryItem = ({ item }) => {
   return (
     <Container>
       <Image src={item.img} />
-      <Info>
-        <Title>{item.title}</Title>
-      </Info>
+      <Link to={item.link}>
+        <Info>
+          <Title>{item.title}</Title>
+        </Info>
+      </Link>
     </Container>
   );
 };

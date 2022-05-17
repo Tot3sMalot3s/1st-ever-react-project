@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import axios from "../api/axios";
+import React, { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+import axios from "axios";
 
 const Container = styled.div`
   width: auto;
@@ -92,78 +93,23 @@ const SuccessLogTxt = styled.p`
 `;
 
 const Login = () => {
-  const { setAuth } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  const userRef = useRef();
-  const errRef = useRef();
-
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "http://1e80-92-118-76-204.ngrok.io/api/login/",
-        JSON.stringify({ username: user, password: pwd }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: false,
-        }
-      );
-
-      console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
-      setAuth({ user, pwd, accessToken });
-      setUser("");
-      setPwd("");
-      navigate(from, { replace: true });
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username Or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unathorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
-    }
-  };
+  let { loginUser } = useContext(AuthContext);
 
   return (
     <Container>
       <Wrapper>
-        {errMsg && <WarnMsg ref={errRef}>{errMsg}</WarnMsg>}
         <Title>SIGN IN</Title>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={loginUser}>
           <Input
             type="text"
-            placeholder="username"
-            ref={userRef}
-            autoComplete="off"
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
+            name="username"
+            placeholder="Enter Username"
             required
           />
           <Input
             type="password"
-            placeholder="password"
-            onChange={(e) => setPwd(e.target.value)}
-            value={pwd}
+            name="password"
+            placeholder="Enter Password"
             required
           />
           <Button>LOG IN</Button>
