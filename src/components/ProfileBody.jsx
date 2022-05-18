@@ -3,6 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   align-items: center;
+  height: 100vh;
 `;
 
 const Wrapper = styled.div`
@@ -27,16 +28,7 @@ const NoAdsText = styled.p`
 `;
 
 const ProfileBody = () => {
-  return (
-    <Container>
-      <Wrapper>
-        <BodyTitle>Your ads</BodyTitle>
-        <Body>
-          <NoAdsText>You don't have any ads at the moment.</NoAdsText>
-        </Body>
-      </Wrapper>
-    </Container>
-  );
+  return <Container></Container>;
 };
 
 export default ProfileBody;

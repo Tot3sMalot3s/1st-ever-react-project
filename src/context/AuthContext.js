@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   let loginUser = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://sheltered-lake-08061.herokuapp.com/api/login/",
+      "https://2599-92-118-76-252.ngrok.io/api/login/",
       {
         method: "POST",
         headers: {
@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
       }
     );
     let data = await response.json();
-    console.log("acces:", data.access);
 
     if (response.status === 200) {
       setAuthTokens(data);
@@ -56,44 +55,53 @@ export const AuthProvider = ({ children }) => {
     history("/login");
   };
 
-  // let updateToken = async () => {
-  //   let response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ refresh: authTokens?.refresh }),
-  //   });
+  let updateToken = async () => {
+    let response = await fetch(
+      "https://2599-92-118-76-252.ngrok.io/api/token/refresh/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh: authTokens?.refresh }),
+      }
+    );
 
-  //   let data = await response.json();
+    let data = await response.json();
 
-  //   if (response.status === 200) {
-  //     setAuthTokens(data);
-  //     setUser(jwt_decode(data.access));
-  //     localStorage.setItem("authTokens", JSON.stringify(data));
-  //   } else {
-  //     logoutUser();
-  //   }
+    if (response.status === 200) {
+      setAuthTokens(data);
+      setUser(jwt_decode(data.access));
+      localStorage.setItem("authTokens", JSON.stringify(data));
+    } else {
+      logoutUser();
+    }
 
-  //   if (loading) {
-  //     setLoading(false);
-  //   }
-  // };
+    if (loading) {
+      setLoading(false);
+    }
+  };
 
   let contextData = {
     user: user,
     authTokens: authTokens,
-    setAuthTokens: setAuthTokens,
-    setUser: setUser,
     loginUser: loginUser,
     logoutUser: logoutUser,
   };
 
   useEffect(() => {
-    if (authTokens) {
-      setUser(jwt_decode(authTokens.access));
+    if (loading) {
+      updateToken();
     }
-    setLoading(false);
+
+    let fourMinutes = 1000 * 60 * 4;
+
+    let interval = setInterval(() => {
+      if (authTokens) {
+        updateToken();
+      }
+    }, fourMinutes);
+    return () => clearInterval(interval);
   }, [authTokens, loading]);
 
   return (

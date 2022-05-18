@@ -161,7 +161,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://sheltered-lake-08061.herokuapp.com/api/register/",
+        "https://2599-92-118-76-252.ngrok.io/api/register/",
         JSON.stringify({
           username: user,
           password1: pwd,
@@ -176,7 +176,6 @@ const Register = () => {
         }
       );
       console.log(response.data);
-      console.log(response.accessToken);
       console.log(JSON.stringify(response));
       setSuccess(true);
     } catch (err) {

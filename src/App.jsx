@@ -12,7 +12,6 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import Favs from "./pages/Favs";
 import Inbox from "./pages/Inbox";
-import CategoriesList from "./pages/CategoriesList";
 import Layout from "./pages/Layout";
 import CreateAd from "./pages/CreateAd";
 import RequireAuth from "./components/requireAuth";
@@ -23,6 +22,7 @@ import Electronics from "./pages/Electronics";
 import RealEstate from "./pages/RealEstate";
 import Services from "./pages/Services";
 import Auto from "./pages/Auto";
+import Settings from "./pages/Settings";
 
 const App = () => {
   return (
@@ -46,7 +46,7 @@ const App = () => {
             <Route path="/favs" element={<Favs />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/create-ad" element={<CreateAd />} />
-            <Route path="/categories-list" element={<CategoriesList />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           {/* Missing */}

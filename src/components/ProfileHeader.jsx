@@ -96,7 +96,9 @@ const ProfileHeader = () => {
             {" "}
             BUY PREMIUM <WorkspacePremiumOutlined />
           </BuyPremium>
-          <Settings>Settings</Settings>
+          <Link to="/settings">
+            <Settings>Settings</Settings>
+          </Link>
           <Logout onClick={logoutUser}>LOG OUT</Logout>
         </RightPart>
       </Wrapper>
