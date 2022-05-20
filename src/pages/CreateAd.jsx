@@ -86,7 +86,7 @@ const TextArea = styled.textarea`
 `;
 
 const SuccessRegTxt = styled.p`
-  margin: 10px;
+  margin: 20px;
 `;
 
 const CreateAd = () => {
@@ -124,8 +124,6 @@ const CreateAd = () => {
           },
           body: formData,
         })
-        let data = await response.json();
-        console.log(data);
         setSuccess(true);
       }catch (err){
         console.log(err);
@@ -141,7 +139,7 @@ const CreateAd = () => {
           <Wrapper>
             <Title>Congratulations!</Title>
             <SuccessRegTxt>
-              Your add has been successfully created. Now you can see it in a
+              Your add has been created successfully. Now you can see it in a
               proper section on website.
             </SuccessRegTxt>
           </Wrapper>
