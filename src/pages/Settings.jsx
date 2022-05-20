@@ -94,20 +94,39 @@ const Settings = () => {
   let { authTokens, logoutUser } = useContext(AuthContext);
   let { user } = useContext(AuthContext);
 
-  const [first_name, setFirstName] = useState("");
-
-  //   const [old_password, setOldPassword] = useState("");
-  //   const [new_password, setNewPassword] = useState("");
-
-  let changePassword = async (e) => {
+  let changeFirstName = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://2599-92-118-76-252.ngrok.io/api/change-password/",
+      `https://sheltered-lake-08061.herokuapp.com/api/users/${user.user_id}/`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + String(authTokens.access),
+          'Authorization': "Bearer" + String(authTokens.access),
+        },
+        body: JSON.stringify({
+          first_name: e.target.first_name.value,
+        }),
+      }
+    );
+    let data = await response.json();
+    if (response.status === 200) {
+      console.log(data);
+      setSuccessText(true);
+    } else {
+      alert("Something went wrong!");
+    }
+  };
+
+  let changePassword = async (e) => {
+    e.preventDefault();
+    let response = await fetch(
+      "https://sheltered-lake-08061.herokuapp.com/api/change-password/",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': "Bearer " + String(authTokens.access),
         },
         body: JSON.stringify({
           old_password: e.target.old_password.value,
@@ -123,7 +142,6 @@ const Settings = () => {
       alert("Something went wrong");
     }
   };
-
   return (
     <Container>
       <Wrapper>
@@ -153,13 +171,12 @@ const Settings = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Form>
+            <Form onSubmit={changeFirstName}>
               <Input
                 type="text"
                 name="first_name"
                 placeholder="Enter your new first name"
                 required
-                onChange={(e) => setFirstName(e.target.value)}
               />
               <Button>Change</Button>
             </Form>

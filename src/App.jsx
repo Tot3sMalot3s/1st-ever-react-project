@@ -27,7 +27,7 @@ import Settings from "./pages/Settings";
 const App = () => {
   return (
     <>
-      <Routes>
+     <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
@@ -43,8 +43,6 @@ const App = () => {
           {/* protected */}
           <Route element={<RequireAuth />}>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/favs" element={<Favs />} />
-            <Route path="/inbox" element={<Inbox />} />
             <Route path="/create-ad" element={<CreateAd />} />
             <Route path="/settings" element={<Settings />} />
           </Route>

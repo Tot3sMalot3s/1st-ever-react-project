@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   let loginUser = async (e) => {
     e.preventDefault();
     let response = await fetch(
-      "https://2599-92-118-76-252.ngrok.io/api/login/",
+      "https://sheltered-lake-08061.herokuapp.com/api/login/",
       {
         method: "POST",
         headers: {
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
   let updateToken = async () => {
     let response = await fetch(
-      "https://2599-92-118-76-252.ngrok.io/api/token/refresh/",
+      "https://sheltered-lake-08061.herokuapp.com/api/token/refresh/",
       {
         method: "POST",
         headers: {
