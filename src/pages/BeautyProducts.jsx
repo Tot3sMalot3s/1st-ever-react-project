@@ -3,7 +3,7 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
-import Products from "../components/Products";
+import Products1 from "../components/Products1";
 
 const Container = styled.div`
   height: 100vh;
@@ -41,9 +41,6 @@ const BeautyProducts = () => {
         <Filter>
           <FilterText>Filter products:</FilterText>
           <Select>
-            <Option disabled selected>
-              Condition
-            </Option>
             <Option>Factory New</Option>
             <Option>Used</Option>
           </Select>
@@ -51,12 +48,13 @@ const BeautyProducts = () => {
         <Filter>
           <FilterText>Sort products:</FilterText>
           <Select>
-            <Option selected>Newest</Option>
+            <Option>Newest</Option>
             <Option>Cheapest</Option>
             <Option>Most expensive</Option>
           </Select>
         </Filter>
       </FilterContainer>
+      <Products1/>
     </Container>
   );
 };

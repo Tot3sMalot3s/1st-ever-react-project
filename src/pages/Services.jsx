@@ -41,9 +41,6 @@ const Services = () => {
         <Filter>
           <FilterText>Filter products:</FilterText>
           <Select>
-            <Option disabled selected>
-              Condition
-            </Option>
             <Option>Factory New</Option>
             <Option>Used</Option>
           </Select>
@@ -51,12 +48,13 @@ const Services = () => {
         <Filter>
           <FilterText>Sort products:</FilterText>
           <Select>
-            <Option selected>Newest</Option>
+            <Option>Newest</Option>
             <Option>Cheapest</Option>
             <Option>Most expensive</Option>
           </Select>
         </Filter>
       </FilterContainer>
+      <Products/>
     </Container>
   );
 };

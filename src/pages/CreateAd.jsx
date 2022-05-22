@@ -90,46 +90,48 @@ const SuccessRegTxt = styled.p`
 `;
 
 const CreateAd = () => {
-  let { authTokens} = useContext(AuthContext);
+  let { authTokens } = useContext(AuthContext);
 
-  const [title, setTitle] = useState('');
-  const [categoryId, setCategory] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [categoryId, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
   const [file1, setFile] = useState(null);
 
   const [success, setSuccess] = useState(false);
 
-  const advertisement ={
-    "title": title,
-    "categoryId": categoryId,
-    "price": price,
-    "description": description
-  }
+  const advertisement = {
+    title: title,
+    categoryId: categoryId,
+    price: price,
+    description: description,
+  };
 
   let createAd = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('file1', file1);
-    formData.append('advertisement', new Blob([JSON.stringify(advertisement)], {
-      type: "application/json"
-  }));
-    try{
+    formData.append("file1", file1);
+    formData.append(
+      "advertisement",
+      new Blob([JSON.stringify(advertisement)], {
+        type: "application/json",
+      })
+    );
+    try {
       let response = await fetch(
         "https://adda-advertisement.herokuapp.com/api/advert/add/",
         {
           method: "POST",
           headers: {
-            'Authorization': "Bearer " + String(authTokens.access),
+            Authorization: "Bearer " + String(authTokens.access),
           },
           body: formData,
-        })
-        setSuccess(true);
-      }catch (err){
-        console.log(err);
-      }
-
-    
+        }
+      );
+      setSuccess(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -156,25 +158,25 @@ const CreateAd = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
               <Title>Choose a proper category</Title>
-              <Select
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <Option value="1">HOUSING</Option>
-                <Option value="2">BEAUTY PRODUCTS</Option>
-                <Option value="3">ELECTRONICS</Option>
-                <Option value="4">REAL ESTATE</Option>
-                <Option value="5">BUSINESS AND SERVICES</Option>
-                <Option value="6">AUTO</Option>
+              <Select onChange={(e) => setCategory(e.target.value)}>
+                <Option value="0">HOUSING</Option>
+                <Option value="1">BEAUTY PRODUCTS</Option>
+                <Option value="2">ELECTRONICS</Option>
+                <Option value="3">REAL ESTATE</Option>
+                <Option value="4">BUSINESS AND SERVICES</Option>
+                <Option value="5">AUTO</Option>
               </Select>
               <Title>Set the price</Title>
               <Input
                 type="number"
-                
                 placeholder="Integers only"
                 onChange={(e) => setPrice(e.target.value)}
               />
               <Title>Pick a photo</Title>
-              <InputFile type="file" onChange={(e)=> setFile(e.target.files[0])}/>
+              <InputFile
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
               <Title>Provide a description</Title>
               <TextArea
                 rows="5"
@@ -193,4 +195,3 @@ const CreateAd = () => {
 };
 
 export default CreateAd;
-

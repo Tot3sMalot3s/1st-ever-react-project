@@ -12,7 +12,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const Products = () => {
+const ProductsProfile = () => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   let [ads, setAds] = useState([]);
@@ -21,14 +21,17 @@ const Products = () => {
     displayHousingAds();
   }, []);
 
+  let { user } = useContext(AuthContext);
+
   let displayHousingAds = async (e) => {
     try {
       let response = await fetch(
-        "https://adda-advertisement.herokuapp.com/api/advert/category/0",
+        `https://adda-advertisement.herokuapp.com/api/advert/user/${user.user_id}/`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + String(authTokens.access),
           },
         }
       );
@@ -48,4 +51,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsProfile;

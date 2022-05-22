@@ -12,7 +12,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const Products = () => {
+const Products2 = () => {
   let { authTokens, logoutUser } = useContext(AuthContext);
 
   let [ads, setAds] = useState([]);
@@ -24,7 +24,7 @@ const Products = () => {
   let displayHousingAds = async (e) => {
     try {
       let response = await fetch(
-        "https://adda-advertisement.herokuapp.com/api/advert/category/0",
+        "https://adda-advertisement.herokuapp.com/api/advert/category/2/",
         {
           method: "GET",
           headers: {
@@ -48,4 +48,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Products2;

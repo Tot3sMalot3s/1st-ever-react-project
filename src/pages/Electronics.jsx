@@ -3,7 +3,7 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
-import Products from "../components/Products";
+import Products2 from "../components/Products2";
 
 const Container = styled.div`
   height: 100vh;
@@ -36,27 +36,25 @@ const Option = styled.option``;
 const Electronics = () => {
   return (
     <Container>
-      <Title>Electronics</Title>
-      <FilterContainer>
-        <Filter>
-          <FilterText>Filter products:</FilterText>
-          <Select>
-            <Option disabled selected>
-              Condition
-            </Option>
-            <Option>Factory New</Option>
-            <Option>Used</Option>
-          </Select>
-        </Filter>
-        <Filter>
-          <FilterText>Sort products:</FilterText>
-          <Select>
-            <Option selected>Newest</Option>
-            <Option>Cheapest</Option>
-            <Option>Most expensive</Option>
-          </Select>
-        </Filter>
-      </FilterContainer>
+    <Title>Electronics</Title>
+    <FilterContainer>
+      <Filter>
+        <FilterText>Filter products:</FilterText>
+        <Select>
+          <Option>Factory New</Option>
+          <Option>Used</Option>
+        </Select>
+      </Filter>
+      <Filter>
+        <FilterText>Sort products:</FilterText>
+        <Select>
+          <Option>Newest</Option>
+          <Option>Cheapest</Option>
+          <Option>Most expensive</Option>
+        </Select>
+      </Filter>
+    </FilterContainer>
+    <Products2/>
     </Container>
   );
 };

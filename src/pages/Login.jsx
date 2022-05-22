@@ -115,7 +115,7 @@ const Login = () => {
           <Button>LOG IN</Button>
         </Form>
         <BottomWrapper>
-          <Transfer to="*">FORGOT PASSWORD?</Transfer>
+          <Transfer to="/password-reset">FORGOT PASSWORD?</Transfer>
           <Transfer to="/register">CREATE NEW ACCOUNT</Transfer>
         </BottomWrapper>
       </Wrapper>

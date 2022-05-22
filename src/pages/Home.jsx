@@ -18,8 +18,6 @@ function Home() {
         <BrowseCategories/>
         <Categories/>
         <Categories1/>
-        <BrowseDeals/>
-        <Products/>
     </div>
   )
 }

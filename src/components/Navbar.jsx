@@ -112,7 +112,7 @@ function Navbar() {
             </ButtonTransferer>
           </MenuItem>
           <MenuItem>
-            <ButtonTransferer to="/favs">
+            <ButtonTransferer to="/favs-list">
               <FavoriteBorderOutlined />
             </ButtonTransferer>
           </MenuItem>
