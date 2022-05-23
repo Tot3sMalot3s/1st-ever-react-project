@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { PersonSharp, WorkspacePremiumOutlined } from "@mui/icons-material";
+import AuthContext from "../context/AuthContext";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -18,6 +19,11 @@ const Image = styled.img`
   height: 90vh;
   object-fit: contain;
 `;
+const QR = styled.img`
+  width: auto;
+  height: 40vh;
+  object-fit: contain;
+`;
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
@@ -25,6 +31,7 @@ const InfoContainer = styled.div`
 const Title = styled.h1`
   max-width: 40ch;
 `;
+
 const Desc = styled.p`
   margin-top: 30px;
   margin-bottom: 40px;
@@ -32,7 +39,7 @@ const Desc = styled.p`
 const Price = styled.h2`
   font-weight: 500;
   font-size: 40px;
-  margin: 30px 0px 10px 0px;
+  margin: 30px 0px;
 `;
 const ButtonWrapper = styled.div`
   display: flex;
@@ -77,9 +84,6 @@ const SellerData = styled.div`
 `;
 const SellerName = styled.h3``;
 
-const SellerStatus = styled.p`
-  color: gray;
-`;
 
 const ButtonBuy = styled.button`
   padding: 10px;
@@ -106,7 +110,16 @@ const SellerContact = styled.div`
   justify-content: flex-end;
   margin: 0px 20px;
 `;
+
+const Text = styled.p`
+  font-size: 16px;
+  color: gray;
+`
+
+
 const Product = () => {
+  let { authTokens } = useContext(AuthContext);
+
   let { advertId } = useParams();
 
   let [adInfo, setAdInfo] = useState({});
@@ -119,11 +132,13 @@ const Product = () => {
   let displayAdInfo = async (e) => {
     try {
       let response = await fetch(
-        `https://adda-advertisement.herokuapp.com/api/advert/${advertId}`,
+        `https://adda-advertisement.herokuapp.com/api/advert/${advertId}/`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': "Bearer " + String(authTokens.access),
+
           },
         }
       );
@@ -145,6 +160,9 @@ const Product = () => {
         <InfoContainer>
           <Title>{adInfo.title}</Title>
           <Price>${adInfo.price}</Price>
+
+          <Text>Published on {adInfo.date}</Text>
+          <Text>Unique views: {adInfo.viewers}</Text>
           <Desc>{adInfo.description}</Desc>
           <ButtonWrapper>
             <ButtonBuy>BUY IT NOW</ButtonBuy>

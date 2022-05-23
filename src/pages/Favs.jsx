@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import FavProducts from '../components/FavProducts';
 
 const Container = styled.div`
   height: 100vh;
@@ -14,6 +15,7 @@ const Favs = () => {
     <>
         <Container>
             <Title>Favorites List</Title>
+            <FavProducts/>
         </Container>
     </>
   )

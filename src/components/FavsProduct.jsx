@@ -1,4 +1,5 @@
 import {
+  ClearOutlined,
   FavoriteBorderOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
@@ -88,25 +89,26 @@ const Btn = styled.button`
 `
 
 
-const Product = ({ item }) => {
+const FavsProduct = ({ item }) => {
 
   let { authTokens } = useContext(AuthContext);
 
 
-  let addToFavorites = async (e) => {
+  let removeFromFavorites = async (e) => {
     e.preventDefault();
     try {
       let response = await fetch(
-        `https://adda-advertisement.herokuapp.com/api/advert/wishlist/add/${item.id}`,
+        `https://adda-advertisement.herokuapp.com/api/advert/wishlist/delete/${item.id}`,
         {
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             'Authorization': "Bearer " + String(authTokens.access),
           },
         }
       );
-      console.log('Advertisement was adde to your wishlist')
+      window.location.reload(false);
+      console.log('Advertisement was deleted from your wishlist')
     } catch (err) {
       console.log(err);
     }
@@ -125,8 +127,8 @@ const Product = ({ item }) => {
           </Icon>
         </ButtonTransferer>
         <Icon>
-          <Btn onClick={addToFavorites}>
-            <FavoriteBorderOutlined />
+          <Btn onClick={removeFromFavorites}>
+            <ClearOutlined/>
           </Btn>
         </Icon>
       </Info>
@@ -134,4 +136,4 @@ const Product = ({ item }) => {
   );
 };
 
-export default Product;
+export default FavsProduct;

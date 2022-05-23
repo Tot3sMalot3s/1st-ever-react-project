@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  margin: 40px 100px 20px 100px;
+  margin: 40px 40px 0px 35px;
   width: 100%;
   border: 0.5px solid #000000;
   display: flex;

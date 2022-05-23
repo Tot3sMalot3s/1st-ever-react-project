@@ -91,7 +91,7 @@ const Settings = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  let { authTokens, logoutUser } = useContext(AuthContext);
+  let { authTokens } = useContext(AuthContext);
   let { user } = useContext(AuthContext);
 
   let changeFirstName = async (e) => {
@@ -102,7 +102,7 @@ const Settings = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': "Bearer" + String(authTokens.access),
+          Authorization: "Bearer" + String(authTokens.access),
         },
         body: JSON.stringify({
           first_name: e.target.first_name.value,
